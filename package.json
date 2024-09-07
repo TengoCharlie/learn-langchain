@@ -1,0 +1,12 @@
+{
+  "name": "langchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsproject1": "pnpm --filter @langchain/project-openai-1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
