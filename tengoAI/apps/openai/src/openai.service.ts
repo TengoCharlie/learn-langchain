@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { ChatOpenAI } from '@langchain/openai';
-import { HumanMessage, SystemMessage } from '@langchain/core/messages';
-import { configDotenv } from 'dotenv';
+// import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
-
-configDotenv();
-
+import { getComedyChain } from './templates/comedy.prompt.template';
 @Injectable()
 export class OpenaiService {
+  constructor() {}
   async getHello(message) {
     const model: ChatOpenAI = new ChatOpenAI({
       model: 'gpt-4o-mini',
+      temperature: 0.7,
     });
     const parser: StringOutputParser = new StringOutputParser();
 
@@ -34,5 +33,9 @@ export class OpenaiService {
       text: message,
       language: 'English',
     });
+  }
+
+  async comedianJoke(message) {
+    return await getComedyChain(message);
   }
 }

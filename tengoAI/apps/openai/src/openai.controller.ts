@@ -9,4 +9,9 @@ export class OpenaiController {
   getHello(@Query('message') message: string) {
     return this.openaiService.getHello(message);
   }
+
+  @Get('/comedy')
+  getComedy(@Query('message') message: string) {
+    return this.openaiService.comedianJoke(message);
+  }
 }
