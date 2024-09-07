@@ -4,7 +4,8 @@
   "description": "",
   "private": "true",
   "scripts": {
-    "tsproject1": "pnpm --filter @langchain/project-openai-1"
+    "tengoai:server": "pnpm --filter @tengoai/server",
+    "start:server:dev": "pnpm run tengoai:server start:dev"
   },
   "keywords": [],
   "author": "",
