@@ -14,4 +14,9 @@ export class OpenaiController {
   getComedy(@Query('message') message: string) {
     return this.openaiService.comedianJoke(message);
   }
+
+  @Get('/recipe')
+  getRecipe(@Query('cuisine') cuisine: string) {
+    return this.openaiService.strutureOutputRecipe(cuisine);
+  }
 }

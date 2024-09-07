@@ -4,9 +4,13 @@ import { ChatOpenAI } from '@langchain/openai';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ComedianChain } from './templates/comedy.prompt.template';
+import { RecipeChain } from './templates/recipe.prompt.template';
 @Injectable()
 export class OpenaiService {
-  constructor(private readonly comdeianChain: ComedianChain) {}
+  constructor(
+    private readonly comdeianChain: ComedianChain,
+    private readonly recipeChain: RecipeChain,
+  ) {}
   async getHello(message) {
     const model: ChatOpenAI = new ChatOpenAI({
       model: 'gpt-4o-mini',
@@ -48,5 +52,10 @@ export class OpenaiService {
       console.log('Message Comedy');
       return comedyChains[1];
     }
+  }
+
+  async strutureOutputRecipe(input) {
+    console.log('Cuisine: ', input);
+    return await this.recipeChain.strcutureOutputRecipe(input);
   }
 }

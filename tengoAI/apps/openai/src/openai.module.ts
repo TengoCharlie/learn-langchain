@@ -4,6 +4,7 @@ import { OpenaiService } from './openai.service';
 import { ConfigModule } from '@nestjs/config';
 import * as path from 'path';
 import { ComedianChain } from './templates/comedy.prompt.template';
+import { RecipeChain } from './templates/recipe.prompt.template';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { ComedianChain } from './templates/comedy.prompt.template';
     }),
   ],
   controllers: [OpenaiController],
-  providers: [OpenaiService, ComedianChain],
+  providers: [OpenaiService, ComedianChain, RecipeChain],
 })
 export class OpenaiModule {}
