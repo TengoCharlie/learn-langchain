@@ -3,6 +3,7 @@ import { OpenaiController } from './openai.controller';
 import { OpenaiService } from './openai.service';
 import { ConfigModule } from '@nestjs/config';
 import * as path from 'path';
+import { ComedianChain } from './templates/comedy.prompt.template';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import * as path from 'path';
     }),
   ],
   controllers: [OpenaiController],
-  providers: [OpenaiService],
+  providers: [OpenaiService, ComedianChain],
 })
 export class OpenaiModule {}

@@ -3,10 +3,10 @@ import { ChatOpenAI } from '@langchain/openai';
 // import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { getComedyChain } from './templates/comedy.prompt.template';
+import { ComedianChain } from './templates/comedy.prompt.template';
 @Injectable()
 export class OpenaiService {
-  constructor() {}
+  constructor(private readonly comdeianChain: ComedianChain) {}
   async getHello(message) {
     const model: ChatOpenAI = new ChatOpenAI({
       model: 'gpt-4o-mini',
@@ -36,6 +36,17 @@ export class OpenaiService {
   }
 
   async comedianJoke(message) {
-    return await getComedyChain(message);
+    const comedyChains = [
+      await this.comdeianChain.comedychainFromTemplate(message),
+      await this.comdeianChain.comdeychainFromMessage(message),
+    ];
+    const random = Math.random();
+    if (random > 0.5) {
+      console.log('Template Comedy');
+      return comedyChains[0];
+    } else {
+      console.log('Message Comedy');
+      return comedyChains[1];
+    }
   }
 }
