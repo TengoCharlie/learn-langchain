@@ -5,11 +5,13 @@ import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ComedianChain } from './templates/comedy.prompt.template';
 import { RecipeChain } from './templates/recipe.prompt.template';
+import { RetrivalChian } from './templates/retrival.chain.template';
 @Injectable()
 export class OpenaiService {
   constructor(
     private readonly comdeianChain: ComedianChain,
     private readonly recipeChain: RecipeChain,
+    private readonly retrivalChain: RetrivalChian,
   ) {}
   async getHello(message) {
     const model: ChatOpenAI = new ChatOpenAI({
@@ -57,5 +59,9 @@ export class OpenaiService {
   async strutureOutputRecipe(input) {
     console.log('Cuisine: ', input);
     return await this.recipeChain.strcutureOutputRecipe(input);
+  }
+
+  getResponseFromDatabseOrInternet(question: string) {
+    return this.retrivalChain.strcutureOutputSolution(question);
   }
 }

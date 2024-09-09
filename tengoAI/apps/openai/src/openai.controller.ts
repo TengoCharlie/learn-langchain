@@ -19,4 +19,9 @@ export class OpenaiController {
   getRecipe(@Query('cuisine') cuisine: string) {
     return this.openaiService.strutureOutputRecipe(cuisine);
   }
+
+  @Get('/browsing')
+  getBrowsing(@Query('question') question: string) {
+    return this.openaiService.getResponseFromDatabseOrInternet(question);
+  }
 }
